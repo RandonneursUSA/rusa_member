@@ -1,0 +1,25 @@
+<?php
+/**
+  @file: rusa_member.module
+
+*/
+
+/**
+ * hook_preprocess_table
+ *
+ * We need this to hide the column for a hidden form value.
+ */
+function rusa_member_preprocess_table(&$variables) {
+  if ($variables['attributes']['id'] == 'edit-event-data') {
+    foreach ($variables['rows'] as $key => &$row ) {
+      foreach ( $row['cells'] as &$cell ) {
+        if ( $cell['content']['#type'] == 'hidden' ) {
+          $cell['attributes']['hidden'] = TRUE;
+          $cell['attributes']['aria-hidden'] = 'true';
+          $cell['tag'] = 'span';
+        }
+      }
+    }
+  }
+}
+

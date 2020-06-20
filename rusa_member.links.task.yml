@@ -1,0 +1,15 @@
+rusa_member.info_tab:
+  title: My RUSA info
+  route_name: rusa_member.info
+  base_route: entity.user.canonical
+  weight: 10
+rusa_member.results_tab:
+  title: My Results
+  route_name: rusa_member.results
+  base_route: entity.user.canonical
+  weight: 11
+rusa_member.edit_tab:
+  title: Edit RUSA personal info
+  route_name: rusa_member.edit_form
+  base_route: entity.user.canonical
+  weight: 20

@@ -1,0 +1,24 @@
+rusa_member.info:
+  path: '/user/{user}/info'
+  defaults:
+    _title: 'My RUSA info'
+    _controller: '\Drupal\rusa_member\Controller\RusaMemberViewController::info'
+  requirements:
+    _permission: 'view rusa information'
+    user: \d+
+rusa_member.results:
+  path: '/user/{user}/results'
+  defaults:
+    _title: 'My Results'
+    _controller: '\Drupal\rusa_member\Controller\RusaMemberViewController::results'
+  requirements:
+    _permission: 'view rusa information'
+    user: \d+
+rusa_member.edit_form:
+  path: '/user/{user}/infoedit'
+  defaults:
+    _title: 'Edit personal information'
+    _form: '\Drupal\rusa_member\Form\RusaMemberEditForm'
+  requirements:
+    _permission: 'edit rusa information'
+    user: \d+
