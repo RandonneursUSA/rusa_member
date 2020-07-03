@@ -78,7 +78,9 @@ class RusaMemberViewController extends ControllerBase {
           $coms[] = $committee;
         }
         else {
-          $positions[] = $title;
+            if ($title != 'Permanent Route Owner') {
+                $positions[] = $title;
+            }
         }
       }
     }
@@ -90,11 +92,13 @@ class RusaMemberViewController extends ControllerBase {
     }
 
     // If perm route owner
+    /*
     if (in_array('Permanent Route Owner', $titles)) {
       $pobj   = new RusaPermanents(['key' => 'mid', 'val' => $this->mid]);
       $perms  = $pobj->getPermsByOwner($this->mid);
     }
-
+    */
+    
     $output = [
       '#type'       => 'container',
       '#attributes' => ['class'   => ['rusa-info']],
