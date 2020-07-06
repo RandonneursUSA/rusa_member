@@ -77,13 +77,13 @@ class RusaMemberViewController extends ControllerBase {
         if ($count == 1) {
           $coms[] = $committee;
         }
-        /*
+        
         else {
             if ($title != 'Permanent Route Owner') {
                 $positions[] = $title;
             }
         }
-        */
+        
       }
     }
 
