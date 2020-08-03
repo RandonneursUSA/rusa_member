@@ -1,0 +1,7 @@
+{
+    "name": "rusa/rusa_member",
+    "description": "Drupal module for RUSA",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "require": {}
+}
