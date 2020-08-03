@@ -203,6 +203,8 @@ class RusaMemberViewController extends ControllerBase {
 
   /**
    * Display results
+   *
+   * @To-do: Add yearly summary and change sort order
    */
   public function results() {
     
