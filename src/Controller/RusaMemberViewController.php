@@ -77,13 +77,11 @@ class RusaMemberViewController extends ControllerBase {
         if ($count == 1) {
           $coms[] = $committee;
         }
-        
         else {
             if ($title != 'Permanent Route Owner') {
                 $positions[] = $title;
             }
         }
-        
       }
     }
 
@@ -201,47 +199,81 @@ class RusaMemberViewController extends ControllerBase {
   }
 
 
-  /**
-   * Display results
-   *
-   * @To-do: Add yearly summary and change sort order
-   */
-  public function results() {
+    /**
+     * Display results
+     */
+    public function results() {
     
-    // Get member's results
-    $resobj  = new RusaResults(['key' => 'mid', 'val' => $this->mid]);
-    $results = $resobj->getResults();
+        // Get member's results
+        $resobj  = new RusaResults(['key' => 'mid', 'val' => $this->mid]);
+        $data = $resobj->getResults();
+      
+        // Group by year
+        foreach ($data as $key => $result) {
+            $year = date("Y",strtotime($result->date));
+            $years[$year]['rides'][$key] = $result; 
+            $years[$year]['dist'] += $result->dist;
+            $total += $result->dist;
+        }
+        
+        // Sort the years DESC
+        $kyears = array_keys($years);
+        rsort($kyears);
+    
+        // Loop through years
+        foreach ($kyears as $year) {
+            $row['data'] = [$year, 'Annual Total: ' . $years[$year]['dist'] . ' km', '', '', '', ''];
+            $row['class'] = 'rusa-header-row';
+            $rows[] = $row;
+            
+            $data = $years[$year]['rides'];
+            $results = [];
+            $asort  = [];
+            
+            // Sort ASC within year
+            foreach ($data as $key => $result) {
+                $results[$key] = $result;
+                $asort[$key] = strtotime($result->date);
+            }
+            array_multisort($asort, SORT_NUMERIC, SORT_ASC, $results);            
+            
+            // Build the table row
+            foreach ($results as $rsid => $result) {
+                $rows[] = [
+                    $result->cert,
+                    $result->type,
+                    $result->dist,
+                    $result->date,
+                    $this->t('<a href=' . $result->routelink . '>' . $result->routename . '</a>'),
+                    $result->time,
+                ];
+            }
+        }
+        
+        // Display grand totoal
+        $row['data'] = ['Grand Total', $total . ' km', '', '', '', ''];
+        $row['class'] = 'rusa-header-row';        
+        $rows[] = $row;
+        
+        // Now construct the table
+        $output = [
+          '#type'     => 'table',
+          '#title'    => $this->t("Results"),
+          '#header'   => [
+            $this->t("Cert No."),
+            $this->t("Type"),
+            $this->t("Km"),
+            $this->t("Date"),
+            $this->t("Route"),
+            $this->t("Time"),
+          ],
+          '#rows'       => $rows,
+          '#attributes' => ['class'   => ['rusa-table']],
+          '#attached'   => ['library' => ['rusa_api/rusa_style']],
+        ];
 
-    $rows = [];
-    foreach ($results as $rsid => $result) {
-      $rows[] = [
-        $result->cert,
-        $result->type,
-        $result->dist,
-        $result->date,
-        $result->routename,
-        $result->time,
-      ];
+        return $output;
     }
-
-    $output = [
-      '#type'     => 'table',
-      '#title'    => $this->t("Results"),
-      '#header'   => [
-        $this->t("Cert No."),
-        $this->t("Type"),
-        $this->t("Km"),
-        $this->t("Date"),
-        $this->t("Route"),
-        $this->t("Time"),
-      ],
-      '#rows'       => $rows,
-      '#attributes' => ['class'   => ['rusa-table']],
-      '#attached'   => ['library' => ['rusa_api/rusa_style']],
-    ];
-
-    return $output;
-  }
 
 
 } //EoC
