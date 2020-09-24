@@ -8,8 +8,8 @@ rusa_member.results_tab:
   route_name: rusa_member.results
   base_route: entity.user.canonical
   weight: 11
-rusa_member.edit_tab:
-  title: Edit RUSA personal info
-  route_name: rusa_member.edit_form
-  base_route: entity.user.canonical
-  weight: 20
+#rusa_member.edit_tab:
+#  title: Edit RUSA personal info
+#  route_name: rusa_member.edit_form
+#  base_route: entity.user.canonical
+#  weight: 20

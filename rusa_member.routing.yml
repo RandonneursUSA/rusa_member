@@ -6,6 +6,7 @@ rusa_member.info:
   requirements:
     _permission: 'view rusa information'
     user: \d+
+
 rusa_member.results:
   path: '/user/{user}/results'
   defaults:
@@ -14,6 +15,9 @@ rusa_member.results:
   requirements:
     _permission: 'view rusa information'
     user: \d+
+  options:
+    no_cache: 'TRUE'
+
 rusa_member.edit_form:
   path: '/user/{user}/infoedit'
   defaults:
