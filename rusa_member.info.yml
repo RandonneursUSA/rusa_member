@@ -1,7 +1,7 @@
 name: RUSA Member
 type: module
 description: Adds tabs to the user profile with RUSA data 
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^8 || ^9 || ^10
 package: RUSA
 version: 8.x-0.2.2
 
