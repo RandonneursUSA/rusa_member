@@ -13,6 +13,7 @@ use Drupal\user\Entity\User;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AccountProxy;
 use Drupal\Core\Messenger;
+use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -202,7 +203,7 @@ class RusaMemberViewController extends ControllerBase {
     /**
      * Display results
      */
-    public function results() {
+    public function oldresults() {
     
         // Get member's results
         $resobj  = new RusaResults(['key' => 'mid', 'val' => $this->mid]);
@@ -273,6 +274,24 @@ class RusaMemberViewController extends ControllerBase {
         ];
 
         return $output;
+    }
+    
+    /**
+     * Display results link
+     *
+     * Build a link to the perl results script 
+     * passing in this members RUSA # (mid)
+     */
+    public function results() {
+    
+     	$url = Url::fromRoute('rusa_member.perl.results', ['mid' => $this->mid]);
+        $link = '<a href="' . $url->toString() . '">' . 'Your RUSA results'  . '</a>';
+        $output= [
+           '#markup' => $this->t($link),
+        ];
+        return $output;
+    
+    
     }
 
 

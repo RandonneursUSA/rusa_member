@@ -26,3 +26,6 @@ rusa_member.edit_form:
   requirements:
     _permission: 'edit rusa information'
     user: \d+
+    
+rusa_member.perl.results:
+  path: '/cgi-bin/resultsearch_PF.pl'
