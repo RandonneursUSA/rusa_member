@@ -6,5 +6,6 @@ rusa_member.info:
   requirements:
     _permission: 'view rusa information'
     user: \d+
-
+  options:
+    no_cache: TRUE
 
