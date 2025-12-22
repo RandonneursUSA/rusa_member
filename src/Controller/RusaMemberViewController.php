@@ -64,6 +64,7 @@ class RusaMemberViewController extends ControllerBase {
     $clubs  = $clobj->getClubs();
 
     // See if member is an official
+    $titles = [];
     $offobj = new RusaOfficials(['key' => 'mid', 'val' => $this->mid]);
     if ($offobj->isOfficial($this->mid)) {
       $offobj->addTitles();
